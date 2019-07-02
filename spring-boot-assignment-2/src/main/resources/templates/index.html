@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Employee Management</title>
+    
+    <!-- Loading animation -->
+    <script th:src="@{js/pace.min.js}"></script>
+
+    <!-- Bootstrap core CSS and Material Bootstrap -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{css/bootstrap-material-design.css}" rel="stylesheet">
+    <link th:href="@{css/ripples.min.css}" rel="stylesheet">
+    <link th:href="@{css/material-scrolltop.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/material-blog.css}" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <br />
+	<div class="container ">
+
+      <div class="row">
+
+        <div class="col-sm-12 blog-main">
+
+          <div class="row">
+            <div class="col-md-12">
+              <section class="blog-post">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="blog-post-content">
+                      <h1 class="blog-post-title">Employee Management Screen</h1> <br />
+                      <div th:if="${successMsg!= null}" class="alert alert-success" role="alert">
+                           <span th:text="${successMsg}"></span>
+                      </div>
+                      <div class="navbar navbar-inverse">
+                        <div class="container-fluid">
+                          <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" th:href="@{'/index'}">Manage Employee Information</a>
+                          </div>
+                          <div class="navbar-collapse collapse navbar-responsive-collapse">
+                            <ul class="nav navbar-nav">
+                              
+                            <form th:action="@{/searchProcess}" method="POST" class="navbar-form navbar-left">
+                              <div class="form-group">
+                                <input type="text" class="form-control col-md-8" name="search" th:value="*{search}" placeholder="Search">
+                              </div>
+                              <button class="btn btn-primary" type="submit" name="search-btn" value="Search">Search</button>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+							  <li><a th:href="@{'/addEmployee'}" >Add Employee</a></li>
+                            </ul>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+						
+						  <table class="table table-condensed">
+							<thead>
+							  <tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Age</th>
+								<th>City</th>
+								<th>Action</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr th:each="employee : ${employeeList}" >
+							     <th scope="row" th:utext="${employee.id}">Id</th>
+							     <td th:utext="${employee.name}">Name</td>
+							     <td th:utext="${employee.age}">Age</td>
+							     <td th:utext="${employee.address}">Address</td>
+							     <td><a
+										th:href="@{'/editEmployee/id/' + ${employee.id}}"><span
+										class="glyphicon glyphicon-edit"></span></a>&nbsp; &nbsp; <a
+										th:href="@{'/deleteEmployee/id/' + ${employee.id}}"><span
+										class="glyphicon glyphicon-trash"></span></a></td>
+							  </tr>
+							 
+							</tbody>
+						  </table>
+                    </div>
+                  </div>
+                </div>
+              </section><!-- /.blog-post -->
+            </div>
+          </div>
+
+        </div><!-- /.blog-main -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    
+
+    <button class="material-scrolltop primary" type="button"></button>
+
+    <script th:src="@{js/jquery-1.11.3.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/ripples.min.js}"></script>
+    <script th:src="@{js/material.min.js}"></script>
+    <script th:src="@{js/material-scrolltop.js}"></script>
+    <script th:src="@{js/main.js}"></script>
+
+    <script>
+      $.material.init();
+      $('body').materialScrollTop();
+    </script>
+
+  </body>
+</html>
